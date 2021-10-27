@@ -1,14 +1,8 @@
 ﻿<Properties StartupConfiguration="{AA70AB09-6A0C-E188-0213-CC269FBE8872}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/1_Scripts/Player/PlayerManager.cs">
-    <Files>
-      <File FileName="Assets/1_Scripts/Player/PlayerLocomotion.cs" Line="9" Column="39" />
-      <File FileName="Assets/1_Scripts/Player/InputManager.cs" Line="12" Column="1" />
-      <File FileName="Assets/1_Scripts/Player/PlayerManager.cs" Line="8" Column="43" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/1_Scripts/Player/PlayerManager.cs" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="f2e37205-a333-4b40-8ba4-88a42f6932b6" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="690f8caa-bf8d-4ced-867b-ed4c4563277d" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

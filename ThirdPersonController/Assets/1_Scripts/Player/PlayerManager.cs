@@ -23,7 +23,7 @@ public class PlayerManager : MonoBehaviour
         inputManager.HandleAllInputs();
     }
 
-    private void FixedUpdate()  // FinxedUpdate() is supposed to be used when moving a Rigidbody
+    private void FixedUpdate()  // FinxedUpdate() is supposed to be used when moving a Rigidbody or when applying physics based on the physics engine
     {
         // Move Player
         playerLocomotion.HandleAllMovement();

@@ -14,7 +14,6 @@ public class PlayerLocomotion : MonoBehaviour
     public float movementSpeed = 7;
     public float rotaionSpeed = 15;
 
-
     private void Awake()
     {
         // Get references on the required components on Player
@@ -37,10 +36,11 @@ public class PlayerLocomotion : MonoBehaviour
     /// </summary>
     private void HandleMovement()
     {
-        // Update the movement direction along with the input
-        moveDirection = cameraObject.forward * inputManager.verticalInput;  // Player's movement direction along with the vertical input
-        moveDirection += cameraObject.right * inputManager.horizontalInput; // Plaeyr's movement direction along with the horizontal input
-                                                                            // The main direction is forward, so the input from the x-axis should be added unless, the player will look at either of right or left
+        // Calculate the movement based on the inputs along with each axis
+        moveDirection = cameraObject.forward * inputManager.verticalInput;  // Player's movement direction along with the vertical input. // Transform.forward is the direction the transform is looking at
+        moveDirection += cameraObject.right * inputManager.horizontalInput; // Player's movement direction along with the horizontal input
+                                                                            // The main direction is forward, so the input from the x-axis should be added or the input processed later will occupy ignoring the first one
+                                                                            // Or, Bring the horizontal input part before and put =
         // Normalize the movement direction
         moveDirection.Normalize();
         // In order to prevent Player from moving towards the sky
@@ -49,8 +49,7 @@ public class PlayerLocomotion : MonoBehaviour
         moveDirection *= movementSpeed;
 
         Vector3 movementVelocity = moveDirection;   // Just to make the codes tidy
-        // Change the posiiton of the player along with the velocity
-        playerRigidbody.velocity = movementVelocity;
+        playerRigidbody.velocity = movementVelocity;// Change the posiiton of Player's Rigidody along with the velocity
     }
 
     /// <summary>
@@ -58,15 +57,15 @@ public class PlayerLocomotion : MonoBehaviour
     /// </summary>
     private void HandleRotation()
     {
-        // Initial value of the rotation
+        // Initialize the value of rotation
         Vector3 targetDirection = Vector3.zero;
 
-        // Player's rotation along with each input axis
+        // Calculate the target direction based on the inputs along with each axis
         targetDirection = cameraObject.forward * inputManager.verticalInput;
         targetDirection += cameraObject.right * inputManager.horizontalInput;
         // Normalize the movement direction
         targetDirection.Normalize();
-        // In order to prevent Player from moving towards the sky
+        // In order to prevent Player from rotating towards the sky
         targetDirection.y = 0;
 
         // To prevent Player from snapping to forward direction when there is no input
@@ -75,7 +74,7 @@ public class PlayerLocomotion : MonoBehaviour
             targetDirection = transform.forward;    // Transform.forward is the direction Player is looking at
         }
 
-        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);   // Transform a rotation in Vector3 to a roation in Quaternion
+        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);   // Transform a rotation in Vector3 to a rotation in Quaternion, setting it as a forward direction
         Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotaionSpeed * Time.deltaTime);    // Process the rotation with Slerp()
 
         // Apply the rotation
