@@ -14,7 +14,7 @@ public class InputManager : MonoBehaviour
     public Vector2 movementInput;       // a variable to hold the movement input
     public float horizontalInput;       // holding the horizontal input only from "movementInput"
     public float verticalInput;         // holding the vertical input only from "movementInput"
-    private float moveAmount;
+    private float moveAmount;           // for now, Strafing won't work since Animator can take only values between 0 and 1, where Player can go forwards only
 
     private void Awake()
     {
@@ -61,9 +61,11 @@ public class InputManager : MonoBehaviour
         horizontalInput = movementInput.x;
         verticalInput = movementInput.y;
 
-        // Clamp the input values between 0 and 1 by only using their absolute values since the parameters in animator can only accept values between 0 and 1
+        // Clamp the input values between 0 and 1 by only using their absolute values
+        // since the parameters in Animator can only accept values between 0 and 1
         moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
-        Console.WriteLine(moveAmount);
+
+        // Send the inputs to the parameters in Animator
         animatorManager.UpdateAnimatorValues(0, moveAmount);
     }
 }
