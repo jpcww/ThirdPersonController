@@ -55,9 +55,10 @@
   <ItemGroup>
     <Compile Include="Assets/1_Scripts/Player/PlayerLocomotion.cs" />
     <Compile Include="Assets/1_Scripts/Player/PlayerManager.cs" />
+    <Compile Include="Assets/1_Scripts/Player/AnimatorManager.cs" />
     <Compile Include="Assets/1_Scripts/Player/InputManager.cs" />
     <Compile Include="Assets/1_Scripts/Player/PlayerControls.cs" />
-    <Compile Include="Assets/1_Scripts/Player/AnimatorManager.cs" />
+    <Compile Include="Assets/1_Scripts/Player/CameraManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

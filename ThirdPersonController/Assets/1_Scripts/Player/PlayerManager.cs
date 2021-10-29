@@ -8,12 +8,14 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     InputManager inputManager;
+    CameraManager cameraManager;
     PlayerLocomotion playerLocomotion;
 
     private void Awake()
     {
         // Get references on the required components on Player
         inputManager = GetComponent<InputManager>();
+        cameraManager = FindObjectOfType<CameraManager>(); // CameraManager is not attached to Player
         playerLocomotion = GetComponent<PlayerLocomotion>();
     }
 
@@ -27,5 +29,10 @@ public class PlayerManager : MonoBehaviour
     {
         // Move Player
         playerLocomotion.HandleAllMovement();
+    }
+
+    private void LateUpdate()
+    {
+        cameraManager.HandleAllCameraMovement(); 
     }
 }

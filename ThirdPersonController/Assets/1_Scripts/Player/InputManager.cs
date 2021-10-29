@@ -16,6 +16,12 @@ public class InputManager : MonoBehaviour
     public float verticalInput;         // holding the vertical input only from "movementInput"
     private float moveAmount;           // for now, Strafing won't work since Animator can take only values between 0 and 1, where Player can go forwards only
 
+    public Vector2 cameraInput;         // a variable to hold the camera movement input
+    public float horizontalCameraInput;
+    public float verticalCameraInput;
+
+
+
     private void Awake()
     {
         // Referencing AnimatorManager on Player
@@ -31,9 +37,10 @@ public class InputManager : MonoBehaviour
             // Fill up PlayerControls variable
             playerControls = new PlayerControls();
 
-            // Record the value of the movement when the movement input is executed
-            // when "Movement" in Input Actions has been performed, the lambda expression is called
+            // Record the values of the movement/camera movement when the inputs are executed
+            // when "Movement"/"Camera" in Input Actions has been performed, the lambda expression is called
             playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
+            playerControls.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
         }
 
         playerControls.Enable();
@@ -60,6 +67,10 @@ public class InputManager : MonoBehaviour
         // Split the movement input by x/y axis
         horizontalInput = movementInput.x;
         verticalInput = movementInput.y;
+
+        // Split the camera movement input by x/y axis
+        horizontalCameraInput = cameraInput.x;
+        verticalCameraInput = cameraInput.y;
 
         // Clamp the input values between 0 and 1 by only using their absolute values
         // since the parameters in Animator can only accept values between 0 and 1
