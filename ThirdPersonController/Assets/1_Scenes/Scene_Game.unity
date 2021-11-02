@@ -2002,13 +2002,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.078459114, y: 0, z: 0, w: 0.99691737}
   m_LocalPosition: {x: 0, y: 0, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2129034875}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 9, y: 0, z: 0}
 --- !u!1 &967675966
 GameObject:
   m_ObjectHideFlags: 0
@@ -4230,13 +4230,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1c5c7e177bca4877b7c629ef4943599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTransform: {fileID: 9109373982426236872}
+  targetTransform: {fileID: 0}
   cameraPivot: {fileID: 2129034875}
   cameraFollowSpeed: 0.2
-  cameraLookSpeed: 2
-  cameraPivotSpeed: 2
-  lookAngle: 0
-  pivotAngle: 0
+  horizontalCameraSpeed: 2
+  verticalCameraSpeed: 2
+  horizontalAngle: 0
+  verticalAngle: 0
+  minVerticalAngel: -35
+  maxVerticalAngle: 35
+  cameraCollisionRadius: 2
+  cameraCollisionOffset: 0.2
+  minimumCollisionOffset: 0.2
+  collisionLayer:
+    serializedVersion: 2
+    m_Bits: 65
 --- !u!4 &2102780169
 Transform:
   m_ObjectHideFlags: 0
@@ -4545,8 +4553,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!4 &9109373982426236872 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1884797561173890144, guid: d545911f6dce94655b3c9945d0dacdd6, type: 3}
-  m_PrefabInstance: {fileID: 8000937853792618778}
-  m_PrefabAsset: {fileID: 0}

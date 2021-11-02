@@ -31,7 +31,7 @@ public class PlayerManager : MonoBehaviour
         playerLocomotion.HandleAllMovement();
     }
 
-    private void LateUpdate()
+    private void LateUpdate()   // LateUpdate() is used since the camera is not to follow Player right away
     {
         cameraManager.HandleAllCameraMovement(); 
     }

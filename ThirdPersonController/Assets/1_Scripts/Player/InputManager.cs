@@ -20,8 +20,6 @@ public class InputManager : MonoBehaviour
     public float horizontalCameraInput;
     public float verticalCameraInput;
 
-
-
     private void Awake()
     {
         // Referencing AnimatorManager on Player
