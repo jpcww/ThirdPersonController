@@ -1,31 +1,12 @@
 ﻿<Properties StartupConfiguration="{AA70AB09-6A0C-E188-0213-CC269FBE8872}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/1_Scripts/Player/AnimatorManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/1_Scripts/Player/CameraManager.cs">
     <Files>
-      <File FileName="Assets/1_Scripts/Player/CameraManager.cs" Line="17" Column="50" />
-      <File FileName="Assets/1_Scripts/Player/PlayerManager.cs" Line="16" Column="44" />
-      <File FileName="Assets/1_Scripts/Player/InputManager.cs" Line="40" Column="78" />
-      <File FileName="Assets/1_Scripts/Player/PlayerLocomotion.cs" Line="1" Column="1" />
-      <File FileName="Assets/1_Scripts/Player/AnimatorManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/1_Scripts/Player/CameraManager.cs" Line="126" Column="1" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="ThirdPersonController" expanded="True">
-            <Node name="Assets" expanded="True">
-              <Node name="1_Scripts" expanded="True">
-                <Node name="Player" expanded="True">
-                  <Node name="AnimatorManager.cs" selected="True" />
-                </Node>
-              </Node>
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="bf3a1561-2dae-43f8-a3cf-3f5464854619" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="c43674fb-932a-40c7-b2eb-7e890d4a24a3" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

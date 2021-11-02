@@ -10,7 +10,7 @@ public class CameraManager : MonoBehaviour
     public Transform cameraPivot;       // the object that the camera uses to pivot
     private Transform cameraTransform;   // the tranform of the actual camera object in the scene
     private float defaultPosition;      // Camera's Z position : the depth of camera from Player
-    private Vector3 cameraVectorPosition;
+    private Vector3 cameraVectorPosition;   // a variable hoding the result of processing jumped off camera position when colliding
 
     private Vector3 cameraFollowVelocity = Vector3.zero; // the current velocity that the camera follows the target with 
     public float cameraFollowSpeed = 0.2f;
@@ -22,8 +22,8 @@ public class CameraManager : MonoBehaviour
     public float minVerticalAngel = -35;
     public float maxVerticalAngle = 35;
 
-    public float cameraCollisionRadius = 2;
-    public float cameraCollisionOffset = 0.2f;  // How much the camera will jump off of objects its colliding with
+    public float cameraCollisionRadius = 0.2f;
+    public float cameraCollisionOffset = 0.2f;  // How much the camera will jump off of objects it's colliding with
     public float minimumCollisionOffset = 0.2f;
     public LayerMask collisionLayer;    // The layers that the camera collides with
     
@@ -43,7 +43,7 @@ public class CameraManager : MonoBehaviour
     {
         FollowTarget();
         RotateCamera();
-        HandleCameraCollision();
+        HandleCameraCollisions();
     }
 
     // Have the camera follow Player
@@ -64,7 +64,7 @@ public class CameraManager : MonoBehaviour
     // Have Camera rotate along with Player
     private void RotateCamera()
     {
-        Vector3 rotation;
+        Vector3 rotation;   // a variable holding the result of rotation
 
         // Caculate the vertical angle for the camera to follow
             // actually, this varaible should be called, "cameraYAxis" : Rotation is to be calculated along with axes
@@ -72,6 +72,8 @@ public class CameraManager : MonoBehaviour
         // Caculate the horizontal angle for the camera to follow
             // actually, this varaible should be called, "cameraXAxis" : Rotation is to be calculated along with axes
         verticalAngle -= (inputManager.verticalCameraInput * verticalCameraSpeed);
+
+        // Limit the vertical rotation
         verticalAngle = Mathf.Clamp(verticalAngle, minVerticalAngel, maxVerticalAngle);
 
         // Calculate the horizontal rotation
@@ -87,28 +89,36 @@ public class CameraManager : MonoBehaviour
         cameraPivot.localRotation = targetRotation; // for pivoting, it's supposed to be the local rotation
     }
 
-    private void HandleCameraCollision()
+    private void HandleCameraCollisions()
     {
-        // Reset Camera's depth to its default position everytime
+        // Reset Camera's depth to its default position everytime when it's free of collisions
         float targetPosition = defaultPosition;
 
         RaycastHit hit;
-        Vector3 direction = cameraTransform.position - cameraPivot.position;
+        Vector3 direction = cameraTransform.position - cameraPivot.position;    // the direction casting the sphere into
         direction.Normalize();
 
+        // Cast a sphere from CameraPivot with a certain radius into the looking direction until Player's location, 
+        // to detect whether any collision occurs with objects of specific layers
         if(Physics.SphereCast(
             cameraPivot.transform.position, cameraCollisionRadius, direction, out hit, Mathf.Abs(targetPosition), collisionLayer))
         {
-            float distance = Vector3.Distance(cameraPivot.position, hit.point);
+            float distance = Vector3.Distance(cameraPivot.position, hit.point); // the distance between CameraPivot and the object causing the collision
             Debug.Log("distance : " + distance);
-            targetPosition = - (distance - cameraCollisionOffset);
+            targetPosition = -(distance - cameraCollisionOffset);   // the z position the camera will be jumped off to
+            // why -? : -z means, how far it is behind the camera
+            // why "cameraCollisionOffset" : put a extra value between the obstacle and the camera to prevent camera from jitterring
+                // by brining the camera towards Player a bit more
         }
 
+        // if the distance between the camera and Player is too close,
+        // let the camera pass Player through against the wall
         if(Mathf.Abs(targetPosition) < minimumCollisionOffset)
         {
-            targetPosition = targetPosition - minimumCollisionOffset;
+            targetPosition -= minimumCollisionOffset;
         }
 
+        // Apply the calculated value smoothly
         cameraVectorPosition.z = Mathf.Lerp(cameraTransform.localPosition.z, targetPosition, 0.2f);
         cameraTransform.localPosition = cameraVectorPosition;
     }
