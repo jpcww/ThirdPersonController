@@ -20,7 +20,7 @@ public class AnimatorManager : MonoBehaviour
     }
 
     // Pass the movement input to the animator (Humanoid)
-    public void UpdateAnimatorValues(float horizontalMovement, float verticalMovement)
+    public void UpdateAnimatorValues(float horizontalMovement, float verticalMovement, bool isSprinting)
     {
         // Animation Snapping by rounding the values
         // so that there is not subtly blended animations between walking and running
@@ -51,6 +51,13 @@ public class AnimatorManager : MonoBehaviour
         else
             snappedVertical = 0;                                // snapped to idling
         #endregion
+
+        // when sprinting
+        if(isSprinting)
+        {
+            snappedHorizontal = horizontalMovement; // allowing the blending
+            snappedVertical = 2;                    // Fix the vertical value to 2;
+        }
 
         // Change the Horizontal/Vertical parameters on the animator by accessing them with their IDs
         animator.SetFloat(horizontal, snappedHorizontal, 0.1f, Time.deltaTime); // the Damp time is time for blending, or time to take to have a result of blending animations

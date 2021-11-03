@@ -11,7 +11,13 @@ public class PlayerLocomotion : MonoBehaviour
 
     Rigidbody playerRigidbody;
 
-    public float movementSpeed = 7;
+    public bool isSprinting;    // to tell whether Player is sprinting or not
+
+    [Header("Movement Speed")]
+    // Speeds of each locomotion
+    public float walkingSpeed = 1.5f;
+    public float runningSpeed = 5;
+    public float sprintingSpeed = 7;
     public float rotaionSpeed = 15;
 
     private void Awake()
@@ -45,9 +51,27 @@ public class PlayerLocomotion : MonoBehaviour
         moveDirection.Normalize();
         // In order to prevent Player from moving towards the sky
         moveDirection.y = 0;
-        // Apply the movement speed;
-        moveDirection *= movementSpeed;
 
+        // Apply speed for each state;
+        // when sprinting
+        if (isSprinting)
+        {
+            moveDirection *= sprintingSpeed;
+        }
+
+        // when not sprinting
+        else
+        {
+            // when running
+            if (inputManager.moveAmount >= 0.5f)
+                moveDirection *= runningSpeed;
+            // when walking
+            else
+                moveDirection *= walkingSpeed;
+        }
+
+
+        // Apply the process result
         Vector3 movementVelocity = moveDirection;   // Just to make the codes tidy
         playerRigidbody.velocity = movementVelocity;// Change the posiiton of Player's Rigidody along with the velocity
     }

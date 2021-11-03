@@ -104,7 +104,6 @@ public class CameraManager : MonoBehaviour
             cameraPivot.transform.position, cameraCollisionRadius, direction, out hit, Mathf.Abs(targetPosition), collisionLayer))
         {
             float distance = Vector3.Distance(cameraPivot.position, hit.point); // the distance between CameraPivot and the object causing the collision
-            Debug.Log("distance : " + distance);
             targetPosition = -(distance - cameraCollisionOffset);   // the z position the camera will be jumped off to
             // why -? : -z means, how far it is behind the camera
             // why "cameraCollisionOffset" : put a extra value between the obstacle and the camera to prevent camera from jitterring
