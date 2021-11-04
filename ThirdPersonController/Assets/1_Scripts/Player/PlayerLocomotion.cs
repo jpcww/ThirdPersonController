@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class PlayerLocomotion : MonoBehaviour
 {
+    // References on Player    
     InputManager inputManager;
-
-    Vector3 moveDirection;  // holding in which direction Player goes
-    Transform cameraObject; // the main camera is required since player's movement direction is based on where User sees through the camera
-
     Rigidbody playerRigidbody;
 
-    public bool isSprinting;    // to tell whether Player is sprinting or not
+    // References out of Player
+    Vector3 moveDirection;  // holding in which direction Player goes
+    Transform cameraObject; // the main camera is required since player's movement direction is based on where User sees through the camera
 
     [Header("Movement Speed")]
     // Speeds of each locomotion
     public float walkingSpeed = 1.5f;
     public float runningSpeed = 5;
     public float sprintingSpeed = 7;
-    public float rotaionSpeed = 15;
+    public float rotatingSpeed = 15;
+
+    public bool isSprinting;    // to tell whether Player is sprinting or not
 
     private void Awake()
     {
@@ -70,7 +71,6 @@ public class PlayerLocomotion : MonoBehaviour
                 moveDirection *= walkingSpeed;
         }
 
-
         // Apply the process result
         Vector3 movementVelocity = moveDirection;   // Just to make the codes tidy
         playerRigidbody.velocity = movementVelocity;// Change the posiiton of Player's Rigidody along with the velocity
@@ -99,7 +99,7 @@ public class PlayerLocomotion : MonoBehaviour
         }
 
         Quaternion targetRotation = Quaternion.LookRotation(targetDirection);   // Transform a rotation in Vector3 to a rotation in Quaternion, setting it as a forward direction
-        Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotaionSpeed * Time.deltaTime);    // Process the rotation with Slerp()
+        Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotatingSpeed * Time.deltaTime);    // Process the rotation with Slerp()
 
         // Apply the rotation
         transform.rotation = playerRotation;
