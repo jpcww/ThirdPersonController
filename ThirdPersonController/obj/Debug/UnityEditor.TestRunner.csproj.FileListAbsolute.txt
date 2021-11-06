@@ -1,0 +1,2 @@
+/Users/hyobin_mx/_PersonalProject/ThirdPersonController/ThirdPersonController/obj/Debug/UnityEditor.TestRunner.csproj.AssemblyReference.cache
+/Users/hyobin_mx/_PersonalProject/ThirdPersonController/ThirdPersonController/obj/Debug/UnityEditor.TestRunner.csproj.CoreCompileInputs.cache

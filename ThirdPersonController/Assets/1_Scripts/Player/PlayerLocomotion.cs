@@ -6,11 +6,17 @@ public class PlayerLocomotion : MonoBehaviour
 {
     // References on Player    
     InputManager inputManager;
+    PlayerManager playerManager;
+    AnimatorManager animatorManager;
     Rigidbody playerRigidbody;
 
     // References out of Player
     Vector3 moveDirection;  // holding in which direction Player goes
     Transform cameraObject; // the main camera is required since player's movement direction is based on where User sees through the camera
+
+    [Header("Movement Flags")]
+    public bool isSprinting;    // to tell whether Player is sprinting or not
+    public bool isGrounded;     // to tell whether Player is on the ground or not
 
     [Header("Movement Speed")]
     // Speeds of each locomotion
@@ -19,13 +25,20 @@ public class PlayerLocomotion : MonoBehaviour
     public float sprintingSpeed = 7;
     public float rotatingSpeed = 15;
 
-    public bool isSprinting;    // to tell whether Player is sprinting or not
+    [Header("Falling")]
+    public float inAirTimer;
+    public float leapingVelocity;
+    public float fallingVelocity;
+    public float rayCastHeightOffSet = 0.5f;    // a value to have the detecting the ground start from above Player's feet not right botton of them
+    public LayerMask groundLayer;
 
     private void Awake()
     {
         // Get references on the required components on Player
         inputManager = GetComponent<InputManager>();
         playerRigidbody = GetComponent<Rigidbody>();
+        playerManager = GetComponent<PlayerManager>();
+        animatorManager = GetComponent<AnimatorManager>();
 
         // Get a reference on the main camera
         cameraObject = Camera.main.transform;
@@ -34,6 +47,12 @@ public class PlayerLocomotion : MonoBehaviour
     // a function to encapsulate all functions related with Player movement 
     public void HandleAllMovement()
     {
+        HandleFallingAndLanding();  // To make sure to handle falling and landing first : when falling, Player must fall
+
+        // Not allowing Player to move/rotate while performing actions such as falling, landing, or attacking etc
+        if (playerManager.isInteracting)
+            return;
+
         HandleMovement();
         HandleRotation();
     }
@@ -103,5 +122,48 @@ public class PlayerLocomotion : MonoBehaviour
 
         // Apply the rotation
         transform.rotation = playerRotation;
+    }
+
+    private void HandleFallingAndLanding()
+    {
+        RaycastHit hit;
+        Vector3 rayCastOrigin = transform.position;
+        rayCastOrigin.y = rayCastOrigin.y + rayCastHeightOffSet;    // Set offset in the raycast upwards from Player's feet 
+
+        // when not grounded
+        if(!isGrounded)
+        {
+            // when Player is not performing any actions
+            if(!playerManager.isInteracting)
+            {
+                // Play the animation of falling, setting the flag to override Locomotion
+                animatorManager.PlayTargetAnimaiton("Fall", true);
+            }
+
+            inAirTimer += Time.deltaTime;   // a value that increases while Player is in the air : like Gravity
+            playerRigidbody.AddForce(transform.forward * leapingVelocity);   // Add force of leaping to Player 
+            playerRigidbody.AddForce(-Vector3.up * fallingVelocity * inAirTimer);  // Add force of falling to Player, which increases while in the air
+        }
+        
+        // when detecting the ground by casting a sphere before landing
+        if (Physics.SphereCast(rayCastOrigin, 0.2f, -Vector3.up, out hit, groundLayer))
+        {
+            // if not yet touched the ground and not performing any actions
+            if (!isGrounded && !playerManager.isInteracting)
+            {
+                // Play the animation of landing, setting the flag to override Locomotion
+                animatorManager.PlayTargetAnimaiton("Land", true);
+            }
+
+            // Reset the associated flags
+            inAirTimer = 0;
+            isGrounded = true;
+        }
+
+        // while still falling
+        else
+        {
+            isGrounded = false;
+        }
     }
 }

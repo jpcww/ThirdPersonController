@@ -7,16 +7,24 @@ using UnityEngine;
 /// </summary>
 public class PlayerManager : MonoBehaviour
 {
+    // References on Player
     InputManager inputManager;
-    CameraManager cameraManager;
     PlayerLocomotion playerLocomotion;
+    Animator animator;
+    // References outside of Player
+    CameraManager cameraManager;
+
+    // Parameters on Animator
+    public bool isInteracting;
 
     private void Awake()
     {
         // Get references on the required components on Player
         inputManager = GetComponent<InputManager>();
-        cameraManager = FindObjectOfType<CameraManager>(); // CameraManager is not attached to Player
         playerLocomotion = GetComponent<PlayerLocomotion>();
+        animator = GetComponent<Animator>();
+        // Get Reference outside of Player
+        cameraManager = FindObjectOfType<CameraManager>(); // CameraManager is not attached to Player
     }
 
     private void Update()
@@ -33,6 +41,9 @@ public class PlayerManager : MonoBehaviour
 
     private void LateUpdate()   // LateUpdate() is used since the camera is not to follow Player right away
     {
-        cameraManager.HandleAllCameraMovement(); 
+        cameraManager.HandleAllCameraMovement();
+
+        // Check the parameter of "isInteracting" on the animator every frame
+        isInteracting = animator.GetBool("isInteracting");
     }
 }

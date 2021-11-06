@@ -19,6 +19,15 @@ public class AnimatorManager : MonoBehaviour
         vertical = Animator.StringToHash("Vertical");       // With the IDs, the parameters can be accessed and modified in the script
     }
 
+    // Play a targeted animation overriding locomotion with the bool
+    public void PlayTargetAnimaiton(string targetAnimation, bool isInteracting)
+    {
+        // Change the bool parameter on the animator to decide whether to override locomotion or not
+        animator.SetBool("isInteracting", isInteracting);
+        // Play the target animation crossfading from the previous animaiton
+        animator.CrossFade(targetAnimation, 0.2f);
+    }
+
     // Pass the movement input to the animator (Humanoid)
     public void UpdateAnimatorValues(float horizontalMovement, float verticalMovement, bool isSprinting)
     {

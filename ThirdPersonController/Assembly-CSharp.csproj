@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,12 +53,16 @@
     <UnityVersion>2020.3.20f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Analyzer Include="/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Analyzers/Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets/1_Scripts/Player/CameraManager.cs" />
     <Compile Include="Assets/1_Scripts/Player/PlayerLocomotion.cs" />
     <Compile Include="Assets/1_Scripts/Player/PlayerManager.cs" />
+    <Compile Include="Assets/1_Scripts/Player/ResetBool.cs" />
     <Compile Include="Assets/1_Scripts/Player/AnimatorManager.cs" />
     <Compile Include="Assets/1_Scripts/Player/InputManager.cs" />
     <Compile Include="Assets/1_Scripts/Player/PlayerControls.cs" />
-    <Compile Include="Assets/1_Scripts/Player/CameraManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
