@@ -49,7 +49,7 @@ public class PlayerLocomotion : MonoBehaviour
     {
         HandleFallingAndLanding();  // To make sure to handle falling and landing first : when falling, Player must fall
 
-        // Not allowing Player to move/rotate while performing actions such as falling, landing, or attacking etc
+        // Stop Player from moving/rotating while performing actions such as falling, landing, or attacking etc
         if (playerManager.isInteracting)
             return;
 
@@ -142,20 +142,22 @@ public class PlayerLocomotion : MonoBehaviour
 
             inAirTimer += Time.deltaTime;   // a value that increases while Player is in the air : like Gravity
             playerRigidbody.AddForce(transform.forward * leapingVelocity);   // Add force of leaping to Player 
-            playerRigidbody.AddForce(-Vector3.up * fallingVelocity * inAirTimer);  // Add force of falling to Player, which increases while in the air
+            playerRigidbody.AddForce(-Vector3.up * fallingVelocity * inAirTimer);  // Add force of falling to Player. The longer in the air, the quicker Player falls
         }
+
         
-        // when detecting the ground by casting a sphere before landing
+        // when the ground is detected before landing
         if (Physics.SphereCast(rayCastOrigin, 0.2f, -Vector3.up, out hit, groundLayer))
         {
-            // if not yet touched the ground and not performing any actions
+            // this part is not necessary for now
+            // without this, landing animation is played due to the animator 
+            // if not yet touched the ground (for now "isInteracting" does not do anything)
             if (!isGrounded && !playerManager.isInteracting)
             {
                 // Play the animation of landing, setting the flag to override Locomotion
                 animatorManager.PlayTargetAnimaiton("Land", true);
-            }
-
-            // Reset the associated flags
+            }            
+            // Reset the associated flags, "isInterating" is reset in "ResetBool.cs"
             inAirTimer = 0;
             isGrounded = true;
         }

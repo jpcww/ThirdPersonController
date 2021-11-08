@@ -1,9 +1,8 @@
 ﻿<Properties StartupConfiguration="{AA70AB09-6A0C-E188-0213-CC269FBE8872}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/1_Scripts/Player/PlayerLocomotion.cs">
     <Files>
-      <File FileName="Assets/1_Scripts/Player/AnimatorManager.cs" Line="29" Column="1" />
-      <File FileName="Assets/1_Scripts/Player/CameraManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/1_Scripts/Player/PlayerLocomotion.cs" Line="151" Column="1" />
+      <File FileName="Assets/1_Scripts/Player/AnimatorManager.cs" Line="32" Column="105" />
+      <File FileName="Assets/1_Scripts/Player/PlayerLocomotion.cs" Line="52" Column="112" />
       <File FileName="Assets/1_Scripts/Player/PlayerManager.cs" Line="40" Column="1" />
       <File FileName="Assets/1_Scripts/Player/ResetBool.cs" Line="1" Column="1" />
     </Files>
@@ -26,9 +25,7 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="304c0761-959b-4d1f-b31b-a0bee6c7d37d" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/hyobin_mx/_PersonalProject/ThirdPersonController/ThirdPersonController/Assets/1_Scripts/Player/PlayerLocomotion.cs" relfile="Assets/1_Scripts/Player/PlayerLocomotion.cs" line="151" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>

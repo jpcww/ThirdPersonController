@@ -19,7 +19,7 @@ public class AnimatorManager : MonoBehaviour
         vertical = Animator.StringToHash("Vertical");       // With the IDs, the parameters can be accessed and modified in the script
     }
 
-    // Play a targeted animation overriding locomotion with the bool
+    // Play a target animation overriding locomotion with the bool, locking Player into that animation
     public void PlayTargetAnimaiton(string targetAnimation, bool isInteracting)
     {
         // Change the bool parameter on the animator to decide whether to override locomotion or not
