@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AnimatorManager : MonoBehaviour
 {
-    Animator animator;  // the Animator[component] on Player
+    public Animator animator;  // the Animator[component] on Player
     // IDs of the parameters in the Animator to reference them in the script
     int horizontal;
     int vertical;

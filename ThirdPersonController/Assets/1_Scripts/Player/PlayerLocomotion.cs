@@ -17,6 +17,7 @@ public class PlayerLocomotion : MonoBehaviour
     [Header("Movement Flags")]
     public bool isSprinting;    // to tell whether Player is sprinting or not
     public bool isGrounded;     // to tell whether Player is on the ground or not
+    public bool isJumping;      // to tell whether Player is jumping
 
     [Header("Movement Speed")]
     // Speeds of each locomotion
@@ -31,6 +32,11 @@ public class PlayerLocomotion : MonoBehaviour
     public float fallingVelocity;
     public float rayCastHeightOffSet = 0.5f;    // a value to have the detecting the ground start from above Player's feet not right botton of them
     public LayerMask groundLayer;
+
+    [Header("Jumping")]
+    public float jumpHeight = 3;
+    public float gravityIntensity = -15;
+
 
     private void Awake()
     {
@@ -51,6 +57,10 @@ public class PlayerLocomotion : MonoBehaviour
 
         // Stop Player from moving/rotating while performing actions such as falling, landing, or attacking etc
         if (playerManager.isInteracting)
+            return;
+
+        // Stop Player from moving/rotating while jumping
+        if (isJumping)
             return;
 
         HandleMovement();
@@ -131,7 +141,7 @@ public class PlayerLocomotion : MonoBehaviour
         rayCastOrigin.y = rayCastOrigin.y + rayCastHeightOffSet;    // Set offset in the raycast upwards from Player's feet 
 
         // when not grounded
-        if(!isGrounded)
+        if(!isGrounded && !isJumping)
         {
             // when Player is not performing any actions
             if(!playerManager.isInteracting)
@@ -166,6 +176,21 @@ public class PlayerLocomotion : MonoBehaviour
         else
         {
             isGrounded = false;
+        }
+    }
+
+    public void HandleJumping()
+    {
+        // Jumping is allowed when Player is on the ground
+        if(isGrounded)
+        {
+            animatorManager.animator.SetBool("isJumping", true);
+            animatorManager.PlayTargetAnimaiton("Jump", false); // isInteracting should be false to allow movement while jumping
+
+            float jumpingVelocity = Mathf.Sqrt(-2 * gravityIntensity * jumpHeight);
+            Vector3 playerVeleocity = moveDirection;
+            playerVeleocity.y = jumpingVelocity;
+            playerRigidbody.velocity = playerVeleocity;
         }
     }
 }

@@ -26,7 +26,8 @@ public class InputManager : MonoBehaviour
     public float verticalCameraInput;
 
     // Button Inputs
-    public bool leftStickButtonInput; // the button for sprinting : b_Input
+    public bool leftStickButtonInput;   // the button for sprinting : b_Input
+    public bool jumpInput;              // the button for jumping
 
     private void Awake()
     {
@@ -43,10 +44,9 @@ public class InputManager : MonoBehaviour
             // Fill up PlayerControls variable
             playerControls = new PlayerControls();
 
-            // Record the values of the movement/camera movement when the inputs are executed
-            // when "Movement"/"Camera" in Input Actions has been performed, the lambda expression is called
-            playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
-            playerControls.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
+            // Subscribe Movement/Camera inputs
+            playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();    // Movement
+            playerControls.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();        // Camera
 
             /*
             // TODO : change this into toggling instead of holding
@@ -54,7 +54,9 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerActions.LeftStickButton.canceled += i => leftStickButtonInput = false; // Stop sprinting when letting go of the button
             */
 
-            playerControls.PlayerActions.LeftStickButton.performed += i => leftStickButtonInput = (leftStickButtonInput == false) ? true : false;
+            // Subscribe Button inputs
+            playerControls.PlayerActions.LeftStickButton.performed += i => leftStickButtonInput = (leftStickButtonInput == false) ? true : false;   // Sprinting
+            playerControls.PlayerActions.Jump.performed += i => jumpInput = true;   // Jumping
         }
 
         playerControls.Enable();
@@ -73,7 +75,7 @@ public class InputManager : MonoBehaviour
     {
         HandleMovementInput();
         HandleSprintingInput();
-        // HandleJumpInput();
+        HandleJumpingInput();
         // HandleActionInput();
     }
 
@@ -105,6 +107,16 @@ public class InputManager : MonoBehaviour
         else
         {
             playerLocomotion.isSprinting = false;
+        }
+    }
+
+    private void HandleJumpingInput()
+    {
+        // when Jump button has been pressed
+        if(jumpInput)
+        {
+            jumpInput = false;
+            playerLocomotion.HandleJumping();
         }
     }
 }

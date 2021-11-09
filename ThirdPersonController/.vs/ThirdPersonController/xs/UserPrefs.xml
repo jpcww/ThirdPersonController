@@ -1,29 +1,31 @@
 ﻿<Properties StartupConfiguration="{AA70AB09-6A0C-E188-0213-CC269FBE8872}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/1_Scripts/Player/PlayerLocomotion.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/1_Scripts/Player/ResetIsJumping.cs">
     <Files>
-      <File FileName="Assets/1_Scripts/Player/AnimatorManager.cs" Line="32" Column="105" />
-      <File FileName="Assets/1_Scripts/Player/PlayerLocomotion.cs" Line="52" Column="112" />
-      <File FileName="Assets/1_Scripts/Player/PlayerManager.cs" Line="40" Column="1" />
-      <File FileName="Assets/1_Scripts/Player/ResetBool.cs" Line="1" Column="1" />
+      <File FileName="Assets/1_Scripts/Player/InputManager.cs" Line="119" Column="43" />
+      <File FileName="Assets/1_Scripts/Player/PlayerLocomotion.cs" Line="112" Column="6" />
+      <File FileName="Assets/1_Scripts/Player/PlayerManager.cs" Line="49" Column="9" />
+      <File FileName="Assets/1_Scripts/Player/AnimatorManager.cs" Line="14" Column="34" />
+      <File FileName="Assets/1_Scripts/ResetIsJumping.cs" Line="19" Column="60" />
     </Files>
     <Pads>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State>
-          <Value>isGrounded</Value>
-          <Value>playerManager.isInteracting</Value>
-          <Value>hit</Value>
-        </State>
-      </Pad>
-      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+      <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Unity" expanded="True" selected="True" />
+          <Node name="ThirdPersonController" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="1_Scripts" expanded="True">
+                <Node name="Player" expanded="True">
+                  <Node name="ResetIsJumping.cs" selected="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="304c0761-959b-4d1f-b31b-a0bee6c7d37d" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="e2ccc689-0cb0-46cf-8021-831d54746a31" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

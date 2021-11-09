@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityEditor.TestRunner", "U
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.PlasticSCM.Editor", "Unity.PlasticSCM.Editor.csproj", "{932F77A8-5249-3FA6-B05A-9A9F6A6EC1FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Services.Core.Editor", "Unity.Services.Core.Editor.csproj", "{79BC81A7-E780-DF95-7571-889890628682}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Timeline.Editor", "Unity.Timeline.Editor.csproj", "{118F4BF6-FF19-623F-A3D0-C8DB7347DD51}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.VisualStudio.Editor", "Unity.VisualStudio.Editor.csproj", "{1EA6CCDF-5710-9D0C-F9E4-EA608060B1D7}"
@@ -61,6 +63,10 @@ Global
 		{932F77A8-5249-3FA6-B05A-9A9F6A6EC1FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{932F77A8-5249-3FA6-B05A-9A9F6A6EC1FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{932F77A8-5249-3FA6-B05A-9A9F6A6EC1FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79BC81A7-E780-DF95-7571-889890628682}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79BC81A7-E780-DF95-7571-889890628682}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79BC81A7-E780-DF95-7571-889890628682}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79BC81A7-E780-DF95-7571-889890628682}.Release|Any CPU.Build.0 = Release|Any CPU
 		{118F4BF6-FF19-623F-A3D0-C8DB7347DD51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{118F4BF6-FF19-623F-A3D0-C8DB7347DD51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{118F4BF6-FF19-623F-A3D0-C8DB7347DD51}.Release|Any CPU.ActiveCfg = Release|Any CPU
