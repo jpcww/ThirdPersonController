@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -47,20 +47,23 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Package</UnityProjectGenerator>
-    <UnityProjectGeneratorVersion>2.0.11</UnityProjectGeneratorVersion>
+    <UnityProjectGeneratorVersion>2.0.12</UnityProjectGeneratorVersion>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneOSX:2</UnityBuildTarget>
     <UnityVersion>2020.3.22f1</UnityVersion>
   </PropertyGroup>
+  <ItemGroup>
+    <Analyzer Include="/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Analyzers/Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/1_Scripts/Player/CameraManager.cs" />
     <Compile Include="Assets/1_Scripts/Player/PlayerLocomotion.cs" />
     <Compile Include="Assets/1_Scripts/Player/PlayerManager.cs" />
     <Compile Include="Assets/1_Scripts/Player/ResetBool.cs" />
     <Compile Include="Assets/1_Scripts/Player/AnimatorManager.cs" />
+    <Compile Include="Assets/1_Scripts/Player/ResetIsJumping.cs" />
     <Compile Include="Assets/1_Scripts/Player/InputManager.cs" />
     <Compile Include="Assets/1_Scripts/Player/PlayerControls.cs" />
-    <Compile Include="Assets/1_Scripts/Player/ResetIsJumping.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

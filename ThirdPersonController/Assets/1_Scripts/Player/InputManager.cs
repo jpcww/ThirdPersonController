@@ -48,12 +48,6 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();    // Movement
             playerControls.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();        // Camera
 
-            /*
-            // TODO : change this into toggling instead of holding
-            playerControls.PlayerActions.LeftStickButton.performed += i => leftStickButtonInput = true; // Sprint while holding the button
-            playerControls.PlayerActions.LeftStickButton.canceled += i => leftStickButtonInput = false; // Stop sprinting when letting go of the button
-            */
-
             // Subscribe Button inputs
             playerControls.PlayerActions.LeftStickButton.performed += i => leftStickButtonInput = (leftStickButtonInput == false) ? true : false;   // Sprinting
             playerControls.PlayerActions.Jump.performed += i => jumpInput = true;   // Jumping
@@ -115,8 +109,8 @@ public class InputManager : MonoBehaviour
         // when Jump button has been pressed
         if(jumpInput)
         {
-            jumpInput = false;
-            playerLocomotion.HandleJumping();
+            jumpInput = false;  // Reset the flag
+            playerLocomotion.HandleJumping();   // Handle jumping
         }
     }
 }

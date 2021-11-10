@@ -41,11 +41,14 @@ public class PlayerManager : MonoBehaviour
 
     private void LateUpdate()   // LateUpdate() is used since the camera is not to follow Player right away
     {
+        // Move the camera
         cameraManager.HandleAllCameraMovement();
 
-        // Check the parameter in the animator
+        // Check the parameters in the animator
         isInteracting = animator.GetBool("isInteracting");
         playerLocomotion.isJumping = animator.GetBool("isJumping");
+
+        // Update the parameters in the animator
         animator.SetBool("isGrounded", playerLocomotion.isGrounded);
     }
 }

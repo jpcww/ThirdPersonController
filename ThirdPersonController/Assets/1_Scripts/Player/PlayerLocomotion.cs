@@ -101,7 +101,7 @@ public class PlayerLocomotion : MonoBehaviour
         }
 
         // Apply the process result
-        Vector3 movementVelocity = moveDirection;   // Just to make the codes tidy
+        Vector3 movementVelocity = moveDirection;   // Just to make the codes tidy, and can be used somewhere else
         playerRigidbody.velocity = movementVelocity;// Change the posiiton of Player's Rigidody along with the velocity
     }
 
@@ -140,7 +140,7 @@ public class PlayerLocomotion : MonoBehaviour
         Vector3 rayCastOrigin = transform.position;
         rayCastOrigin.y = rayCastOrigin.y + rayCastHeightOffSet;    // Set offset in the raycast upwards from Player's feet 
 
-        // when not grounded
+        // when not grounded and not jumping : while jumping, falling animation won't play
         if(!isGrounded && !isJumping)
         {
             // when Player is not performing any actions
@@ -148,6 +148,7 @@ public class PlayerLocomotion : MonoBehaviour
             {
                 // Play the animation of falling, setting the flag to override Locomotion
                 animatorManager.PlayTargetAnimaiton("Fall", true);
+                Debug.Log("Fall animation");
             }
 
             inAirTimer += Time.deltaTime;   // a value that increases while Player is in the air : like Gravity
@@ -155,10 +156,13 @@ public class PlayerLocomotion : MonoBehaviour
             playerRigidbody.AddForce(-Vector3.up * fallingVelocity * inAirTimer);  // Add force of falling to Player. The longer in the air, the quicker Player falls
         }
 
-        
+
         // when the ground is detected before landing
         if (Physics.SphereCast(rayCastOrigin, 0.2f, -Vector3.up, out hit, groundLayer))
-        {
+        { 
+            //Debug.Log("ground detected");
+            //Debug.Log("isGrounded : " + isGrounded);
+            //Debug.Log("isInteracting : " + playerManager.isInteracting);
             // this part is not necessary for now
             // without this, landing animation is played due to the animator 
             // if not yet touched the ground (for now "isInteracting" does not do anything)
@@ -166,6 +170,7 @@ public class PlayerLocomotion : MonoBehaviour
             {
                 // Play the animation of landing, setting the flag to override Locomotion
                 animatorManager.PlayTargetAnimaiton("Land", true);
+                Debug.Log("land animation");
             }            
             // Reset the associated flags, "isInterating" is reset in "ResetBool.cs"
             inAirTimer = 0;
@@ -184,13 +189,15 @@ public class PlayerLocomotion : MonoBehaviour
         // Jumping is allowed when Player is on the ground
         if(isGrounded)
         {
+            // Set the flag on
             animatorManager.animator.SetBool("isJumping", true);
+            // Play Jumping animation
             animatorManager.PlayTargetAnimaiton("Jump", false); // isInteracting should be false to allow movement while jumping
 
-            float jumpingVelocity = Mathf.Sqrt(-2 * gravityIntensity * jumpHeight);
-            Vector3 playerVeleocity = moveDirection;
-            playerVeleocity.y = jumpingVelocity;
-            playerRigidbody.velocity = playerVeleocity;
+            float jumpingVelocity = Mathf.Sqrt(-2 * gravityIntensity * jumpHeight); // Calcuate a velocity for jumping
+            Vector3 playerVeleocity = moveDirection;    // if Player is running the running velocity has been applied in "moveDirection"                                            
+            playerVeleocity.y = jumpingVelocity;        // Add the jumping velocity into Player's current velocity
+            playerRigidbody.velocity = playerVeleocity; // Move Player according to the velocity
         }
     }
 }

@@ -1,31 +1,16 @@
 ﻿<Properties StartupConfiguration="{AA70AB09-6A0C-E188-0213-CC269FBE8872}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/1_Scripts/Player/ResetIsJumping.cs">
     <Files>
-      <File FileName="Assets/1_Scripts/Player/InputManager.cs" Line="119" Column="43" />
-      <File FileName="Assets/1_Scripts/Player/PlayerLocomotion.cs" Line="112" Column="6" />
-      <File FileName="Assets/1_Scripts/Player/PlayerManager.cs" Line="49" Column="9" />
-      <File FileName="Assets/1_Scripts/Player/AnimatorManager.cs" Line="14" Column="34" />
-      <File FileName="Assets/1_Scripts/ResetIsJumping.cs" Line="19" Column="60" />
+      <File FileName="Assets/1_Scripts/Player/InputManager.cs" Line="74" Column="17" />
+      <File FileName="Assets/1_Scripts/Player/PlayerLocomotion.cs" Line="189" Column="44" />
+      <File FileName="Assets/1_Scripts/Player/PlayerManager.cs" Line="44" Column="27" />
+      <File FileName="Assets/1_Scripts/Player/AnimatorManager.cs" Line="23" Column="74" />
+      <File FileName="Assets/1_Scripts/Player/ResetIsJumping.cs" Line="1" Column="1" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="ThirdPersonController" expanded="True">
-            <Node name="Assets" expanded="True">
-              <Node name="1_Scripts" expanded="True">
-                <Node name="Player" expanded="True">
-                  <Node name="ResetIsJumping.cs" selected="True" />
-                </Node>
-              </Node>
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="e2ccc689-0cb0-46cf-8021-831d54746a31" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="489a943e-e626-4470-a9e8-1997bf50272a" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
