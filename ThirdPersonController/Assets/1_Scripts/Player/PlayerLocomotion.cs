@@ -138,13 +138,18 @@ public class PlayerLocomotion : MonoBehaviour
     {
         RaycastHit hit;
         Vector3 rayCastOrigin = transform.position;
-        rayCastOrigin.y = rayCastOrigin.y + rayCastHeightOffSet;    // Set offset in the raycast upwards from Player's feet 
+
+        rayCastOrigin.y = rayCastOrigin.y + rayCastHeightOffSet;    // Set offset in the raycast upwards from Player's feet
+
+        // for stairs and slopes
+        Vector3 targetPosition;
+        targetPosition = transform.position;
 
         // when not grounded and not jumping : while jumping, falling animation won't play
-        if(!isGrounded && !isJumping)
+        if (!isGrounded && !isJumping)
         {
             // when Player is not performing any actions
-            if(!playerManager.isInteracting)
+            if (!playerManager.isInteracting)
             {
                 // Play the animation of falling, setting the flag to override Locomotion
                 animatorManager.PlayTargetAnimaiton("Fall", true);
@@ -159,7 +164,7 @@ public class PlayerLocomotion : MonoBehaviour
 
         // when the ground is detected before landing
         if (Physics.SphereCast(rayCastOrigin, 0.2f, -Vector3.up, out hit, groundLayer))
-        { 
+        {
             //Debug.Log("ground detected");
             //Debug.Log("isGrounded : " + isGrounded);
             //Debug.Log("isInteracting : " + playerManager.isInteracting);
@@ -171,7 +176,11 @@ public class PlayerLocomotion : MonoBehaviour
                 // Play the animation of landing, setting the flag to override Locomotion
                 animatorManager.PlayTargetAnimaiton("Land", true);
                 Debug.Log("land animation");
-            }            
+            }
+
+            // for stairs and slopes
+            Vector3 rayCastHitPoint = hit.point;    // the postion of the detected ground
+            targetPosition.y = rayCastHitPoint.y; // a new position for feet
             // Reset the associated flags, "isInterating" is reset in "ResetBool.cs"
             inAirTimer = 0;
             isGrounded = true;
@@ -181,6 +190,21 @@ public class PlayerLocomotion : MonoBehaviour
         else
         {
             isGrounded = false;
+        }
+
+        // on the ground, not jumping
+        if (isGrounded && !isJumping)
+        {
+            if (playerManager.isInteracting || inputManager.moveAmount > 0) // performing an action or moving : climbing stairs or slopes
+            {
+                transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime / 0.1f);   // push Player along with the height of stairs/slopes
+            }
+
+            else
+            {
+                // when ideling
+                transform.position = targetPosition;
+            }
         }
     }
 
