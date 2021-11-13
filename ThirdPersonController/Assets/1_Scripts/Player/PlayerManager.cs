@@ -16,6 +16,7 @@ public class PlayerManager : MonoBehaviour
 
     // Parameters on Animator
     public bool isInteracting;
+    public bool isUsingRootMotion;
 
     private void Awake()
     {
@@ -46,6 +47,7 @@ public class PlayerManager : MonoBehaviour
 
         // Check the parameters in the animator
         isInteracting = animator.GetBool("isInteracting");
+        isUsingRootMotion = animator.GetBool("isUsingRootMotion");
         playerLocomotion.isJumping = animator.GetBool("isJumping");
 
         // Update the parameters in the animator

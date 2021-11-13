@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class AnimatorManager : MonoBehaviour
 {
-    public Animator animator;  // the Animator[component] on Player
+    // Components on Player
+    public Animator animator;
+    public PlayerManager playerManager;
+    public PlayerLocomotion playerLocomotion;
+
     // IDs of the parameters in the Animator to reference them in the script
     int horizontal;
     int vertical;
 
     private void Awake()
     {
-        // Reference the animator
+        // Referencing components on Player
         animator = GetComponent<Animator>();
+        playerManager = GetComponent<PlayerManager>();
+        playerLocomotion = GetComponent<PlayerLocomotion>();
 
         // Reference the parameters in the Animator with IDs of Int
         horizontal = Animator.StringToHash("Horizontal");   // the name of the parameters shoudl be exact
@@ -20,10 +26,14 @@ public class AnimatorManager : MonoBehaviour
     }
 
     // Play a target animation overriding locomotion with the bool, locking Player into that animation
-    public void PlayTargetAnimaiton(string targetAnimation, bool isInteracting)
+    public void PlayTargetAnimaiton(string targetAnimation, bool isInteracting, bool useRootMotion = false)
     {
         // Change the bool parameter on the animator to decide whether to override locomotion or not
         animator.SetBool("isInteracting", isInteracting);
+
+        // Change the bool parameter on the animator to decide whether a root motion is used
+        animator.SetBool("isUsingRootMotion", useRootMotion);
+
         // Play the target animation crossfading from the previous animaiton
         animator.CrossFade(targetAnimation, 0.2f);
     }
@@ -71,5 +81,19 @@ public class AnimatorManager : MonoBehaviour
         // Change the Horizontal/Vertical parameters on the animator by accessing them with their IDs
         animator.SetFloat(horizontal, snappedHorizontal, 0.1f, Time.deltaTime); // the Damp time is time for blending, or time to take to have a result of blending animations
         animator.SetFloat(vertical, snappedVertical, 0.1f, Time.deltaTime);
+    }
+
+    private void OnAnimatorMove()   // called in every frame while an animation is playing
+    {
+        if(playerManager.isUsingRootMotion) // when using a root motion
+        {
+            playerLocomotion.playerRigidbody.drag = 0;  // Reset the drag
+            Vector3 deltaPositon = animator.deltaPosition;  // the position of Player during the animation
+            deltaPositon.y = 0; // To prevent Player from moving in the air
+            Vector3 velocity = deltaPositon / Time.deltaTime;   // the velocity Player is moving with the animation in
+
+            // Move Player along with the animation of Root Motion
+            playerLocomotion.playerRigidbody.velocity = velocity;
+        }
     }
 }

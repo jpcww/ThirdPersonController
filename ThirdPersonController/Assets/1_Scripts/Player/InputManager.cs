@@ -28,6 +28,7 @@ public class InputManager : MonoBehaviour
     // Button Inputs
     public bool leftStickButtonInput;   // the button for sprinting : b_Input
     public bool jumpInput;              // the button for jumping
+    public bool dodgeInput;             // the button for dodging
 
     private void Awake()
     {
@@ -51,6 +52,7 @@ public class InputManager : MonoBehaviour
             // Subscribe Button inputs
             playerControls.PlayerActions.LeftStickButton.performed += i => leftStickButtonInput = (leftStickButtonInput == false) ? true : false;   // Sprinting
             playerControls.PlayerActions.Jump.performed += i => jumpInput = true;   // Jumping
+            playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;   // Dodging
         }
 
         playerControls.Enable();
@@ -70,6 +72,7 @@ public class InputManager : MonoBehaviour
         HandleMovementInput();
         HandleSprintingInput();
         HandleJumpingInput();
+        HandleDodgeInput();
         // HandleActionInput();
     }
 
@@ -111,6 +114,16 @@ public class InputManager : MonoBehaviour
         {
             jumpInput = false;  // Reset the flag
             playerLocomotion.HandleJumping();   // Handle jumping
+        }
+    }
+
+    private void HandleDodgeInput()
+    {
+        // when Dodge button has been pressed
+        if(dodgeInput)
+        {
+            dodgeInput = false; // Reset the flag
+            playerLocomotion.HandleDodging();   // Handle dodging
         }
     }
 }

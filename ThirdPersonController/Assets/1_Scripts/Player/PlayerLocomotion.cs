@@ -8,7 +8,7 @@ public class PlayerLocomotion : MonoBehaviour
     InputManager inputManager;
     PlayerManager playerManager;
     AnimatorManager animatorManager;
-    Rigidbody playerRigidbody;
+    public Rigidbody playerRigidbody;
 
     // References out of Player
     Vector3 moveDirection;  // holding in which direction Player goes
@@ -153,8 +153,9 @@ public class PlayerLocomotion : MonoBehaviour
             {
                 // Play the animation of falling, setting the flag to override Locomotion
                 animatorManager.PlayTargetAnimaiton("Fall", true);
-                Debug.Log("Fall animation");
             }
+
+            animatorManager.animator.SetBool("isUsingRootMotion", false);   // off the root motion when falling after dodging
 
             inAirTimer += Time.deltaTime;   // a value that increases while Player is in the air : like Gravity
             playerRigidbody.AddForce(transform.forward * leapingVelocity);   // Add force of leaping to Player 
@@ -223,5 +224,16 @@ public class PlayerLocomotion : MonoBehaviour
             playerVeleocity.y = jumpingVelocity;        // Add the jumping velocity into Player's current velocity
             playerRigidbody.velocity = playerVeleocity; // Move Player according to the velocity
         }
+    }
+
+    public void HandleDodging()
+    {
+        if (playerManager.isInteracting)    // if Player is performing another action, doding is not allowed
+            return;
+
+        // Playe dodging animation
+        animatorManager.PlayTargetAnimaiton("Dodge", true, true); // Set the flag to tell Player is performing an action
+
+        // TODO : Toggle Invulnerable bool for no hp damage during dodging
     }
 }
